@@ -4,74 +4,96 @@
 /*** 
  * `quotes` array 
 ***/
- var quoteArray = [
+var quotes = [
     {
-        "quote": "The Way Get Started Is To Quit Talking And Begin Doing",
-        "name": "Walt Disney"
+        "quote": "There are three things you can do with your life: You can waste it, you can spend it, or you can invest it. The best use of your life is to invest it in something that will last longer than your time on Earth.",
+        "source": "Rick Warren"
     },
     {
         "quote": "The Pessimist Sees Difficulty In Every Opportunity. The Optimist Sees Opportunity In Every Difficulty",
-        "name": "Winston Churchill"
+        "source": "Winston Churchill"
     },
     {
-        "quote":"Don't Let Yesterday Take Up Too Much Of Today.",
-        "name":"Will Rogers",
-        "citation":"book"
+        "quote": "I am not afraid of storms, for I am learning how to sail my ship.",
+        "source": "Louisa May Alcott",
+        "citation": "Little Women"
     },
     {
-        "quote":"You Learn More From Failure Than From Success. Don't Let It Stop You. Failure Builds Character.",
-        "name":"Unknown",
-        "year":"2016"
+        "quote": "I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.",
+        "source": "Bill Gates",
+        "year": "2000"
     },
     {
-        "quote":"It's Not Whether You Get Knocked Down, It's Whether You Get Up.",
-        "name":"Vince Lombardi"
-    }, 
+        "quote": "Focusing your life solely on making a buck shows a certain poverty of ambition",
+        "source": "Barack Obama",
+        "citation": "Knox College Commencement Address",
+        "year": "2005"
+    },
     {
-        "quote":"We May Encounter Many Defeats But We Must Not Be Defeated",
-        "name":"Steve Jobs"
+        "quote": "Stay Hungry. Stay Foolish.",
+        "source": "Steve Jobs",
+        "citation": "Speed in Stanford University",
+        "year": "2005"
+    },
+    {
+        "quote": "You only pass through this life once, you don't come back for an encore.",
+        "source": "Elvis Presley"
+    },
+    {
+        "quote": " Life is about making an impact, not making an income.",
+        "source": "Kevin Kruse"
     }
 ]
 
 /***
  * `getRandomQuote` function
 ***/
-function randomquote(){
-   let random= Math.floor(Math.random()* (quoteArray.length));
-   return quoteArray[random];
+function getRandomQuote() {
+    let random = Math.floor(Math.random() * (quotes.length));
+    return quotes[random];
 }
-
-
 
 /***
  * `printQuote` function
 ***/
+function printQuote() {
+    // 1. Create a variable that calls the getRandomQuote()
+    // function
+    let quote = getRandomQuote();
 
+    // 2. Create a variable that initiates your HTML string with
+    // the first two <p></p> elements, their classNames,
+    // and the quote and source properties, but leave off
+    // the second closing `</p>` tag for now
+    var stringQuoteHTML = '<p class="quote">'
+        + quote.quote + '</p>'
+        + '<p class="source">'
+        + quote.source;
 
-
-// quoteArray.quote=randomquote();
-// quoteArray.name=randomquote();
-function getquote(){
-    let a = randomquote();
-    let quotedisplay = document.getElementById("quote-box");
-    var stringquote = '<p class="quote">' 
-                      + a.quote + '</p>'
-                      + '<p class="source">'
-                      +a.name;
-    if (a.hasOwnProperty('citation')){
-        stringquote += '<span class="citation">' + a.citation + '</span>';
+    // 3. Use an if statement to check if the citation property
+    // exists, and if it does, concatenate a <span></span>
+    // element, appropriate className, and citation property
+    // to the HTML string
+    if (quote.hasOwnProperty('citation')) {
+        stringQuoteHTML += '<span class="citation">' + quote.citation + '</span>';
     }
-    if(a.hasOwnProperty('year')){
-        stringquote += '<span class="year">' + a.year + '</span>';
+
+    // 4. Use an if statement to check of the year property exists,
+    // and if it does, concatenate a <span></span> element,
+    // appropriate className, and year property to the HTML
+    //string
+    if (quote.hasOwnProperty('year')) {
+        stringQuoteHTML += '<span class="year">' + quote.year + '</span>';
     }
-    stringquote += '</p>';
     
-    quotedisplay.innerHTML=stringquote;
-       //console.log(quotedisplay);
-            
-        
-        
-    
+    // 5. After the two if statements, concatenate the closing </p>
+    // tag to the HTML string
+    stringQuoteHTML += '</p>';
+
+    // 6. set the innerHTML of the quote-box div to equal the
+    // complete HTML string}
+    let quoteBox = document.getElementById("quote-box");
+    quoteBox.innerHTML = stringQuoteHTML;
 }
 
 
@@ -80,7 +102,6 @@ function getquote(){
  * The code will look like the following. You need to complete it.
 
 ***/
-
-document.getElementById("load-quote").onclick= function (){
-    getquote();
+document.getElementById("load-quote").onclick = function () {
+    printQuote();
 }
